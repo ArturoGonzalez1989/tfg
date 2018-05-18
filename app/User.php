@@ -33,4 +33,22 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
         //return $this->hasOne('App\Role', 'rol_id');
     }
+
+    public function tematicas()
+    {
+        // con esta función definimos la relación del usuario con el rol
+        return $this->belongsToMany(Tematica::class, 'users_has_tematicas');
+        //return $this->hasOne('App\Role', 'rol_id');
+    }
+
+    public function mensajes()
+    {
+        return $this->hasMany(Mensaje::class);
+    }
+    // public function mensajes()
+    // {
+    //     // con esta función definimos la relación del usuario con el rol
+    //     return $this->hasMany(Mensaje::class);
+    //     //return $this->hasOne('App\Role', 'rol_id');
+    // }
 }

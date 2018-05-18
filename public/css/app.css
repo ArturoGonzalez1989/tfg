@@ -9996,11 +9996,196 @@ a.text-dark:focus {
 
 /*ESTILOS PERSONALIZADOS*/
 
-.navbar-laravel {
-  background-color: #fff;
-  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+body {
+  background-color: white;
 }
+
+@media (min-width: 768px) {
+  #navbar-principal li {
+    padding-right: 20px;
+  }
+
+  #navbar-principal li a {
+    position: relative;
+    font-size: 15px;
+  }
+
+  #navbar-principal li a:after {
+    position: absolute;
+    bottom: 7px;
+    left: 0px;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+    content: "";
+    opacity: 0;
+    -webkit-transition: opacity 0.4s ease 0s, -webkit-transform 0.3s ease 0s;
+    transition: opacity 0.4s ease 0s, -webkit-transform 0.3s ease 0s;
+    transition: opacity 0.4s ease 0s, transform 0.3s ease 0s;
+    transition: opacity 0.4s ease 0s, transform 0.3s ease 0s, -webkit-transform 0.3s ease 0s;
+    -webkit-transform: translateY(20px);
+            transform: translateY(20px);
+  }
+
+  #navbar-principal li a:hover:after {
+    opacity: 1;
+    -webkit-transform: translateY(15px);
+            transform: translateY(15px);
+  }
+}
+
+#seccion1 .fa {
+  font-size: 75px;
+  color: #007BFF;
+}
+
+/*.secciones{
+      padding: 40px 400px;
+      margin: 100px 0;
+    }*/
+
+/* #seccion1{
+      margin: 75px 0 25px 0;
+    }*/
+
+#seccion2 {
+  background-color: #F6F6F6;
+  font-size: 16px;
+}
+
+#seccion4 {
+  background-color: #F6F6F6;
+}
+
+#seccion4 h3 {
+  padding-bottom: 30px;
+  font-size: 25px;
+}
+
+#seccion4 span {
+  font-size: 50px;
+  font-weight: bold;
+  color: #007BFF;
+}
+
+#seccion4 p {
+  font-size: 25px;
+}
+
+#seccion5 {
+  height: 500px;
+}
+
+.h3-info {
+  float: left;
+}
+
+#puntos-info {
+  clear: both;
+}
+
+#iconos-info {
+  font-size: 16px;
+  float: right;
+}
+
+#opinion-mensaje {
+  font-size: 16px;
+}
+
+#opinion-nombre {
+  font-size: 12px;
+  font-style: italic;
+}
+
+.imagen-carousel {
+  max-width: 400px;
+}
+
+.botones-slider {
+  float: right;
+}
+
+.boton-slider1 {
+  background-color: blue;
+  display: inline-block;
+  padding: 10px 15px;
+}
+
+.boton-slider1 * {
+  color: white;
+}
+
+.boton-slider2 {
+  background-color: blue;
+  display: inline-block;
+  padding: 10px 15px;
+}
+
+.boton-slider2 * {
+  color: white;
+}
+
+.separador {
+  width: 60%;
+  padding: 10px 0;
+}
+
+@media (min-width: 992px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    /* Behind the navbar */
+    padding: 0;
+    -webkit-box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .sidebar-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
+    /* Height of navbar */
+    height: calc(100vh - 0px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* Scrollable contents if viewport is shorter than content. */
+  }
+}
+
+.encabezado-1 {
+  font-size: 22px;
+}
+
+hr:last-Child {
+  display: none;
+}
+
+.enlace-facebook {
+  float: right;
+  color: white;
+  font-size: 20px;
+  margin-right: 20px;
+}
+
+/* -------------- */
+
+.separador-titulo {
+  height: 3px;
+  width: 10%;
+  margin: 0;
+  background-color: yellow;
+  margin-bottom: 50px;
+}
+
+/*  .navbar-laravel {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}*/
 
 .starter-template {
   padding: 3rem 1.5rem;
@@ -10008,17 +10193,8 @@ a.text-dark:focus {
 }
 
 .div-encabezado {
-  height: 400px;
+  padding: 200px 0;
   background-image: url("/img/portada2.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.div-encabezado-explorar {
-  height: 400px;
-  background-image: url("/img/fondo.jpg");
-  background-attachment: fixed;
-  background-position: left bottom;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -10058,5 +10234,57 @@ a.no-link {
   background-repeat: no-repeat;
   background-size: cover;
   margin-bottom: 50px;
+}
+
+.col-center {
+  float: none;
+  margin: 0 auto;
+}
+
+.iconos-ruta {
+  font-size: 16px;
+}
+
+/* Estilos para el efecto overlay */
+
+.contenedor {
+  position: relative;
+  /*  width: 50%;*/
+}
+
+.imagen {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  -webkit-transition: .5s ease;
+  transition: .5s ease;
+  background-color: #008CBA;
+}
+
+.contenedor:hover .overlay {
+  opacity: 1;
+}
+
+.texto {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
 }
 

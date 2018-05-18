@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Mensaje;
+use App\Mensaje_Punto;
+use App\Punto;
 use Illuminate\Http\Request;
 
-class ControladorMensajes extends Controller
+class ControladorMensajesPuntos extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,10 +21,10 @@ class ControladorMensajes extends Controller
 
     public function index()
     {
-        $mensajes = Mensaje::all();
+        $mensajes = Mensaje_Punto::all();
         //$mensajes = DB::table('mensajes')->get(); // Solicitamos a la BD todos los registros y los guardamos en la variable mensajes
 
-        return view('admin.mensajes.index', compact('mensajes'));
+        return view('admin.mensajes.index_puntos', compact('mensajes'));
     }
 
     /**
@@ -31,9 +32,16 @@ class ControladorMensajes extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    // public function create()
+    // {
+    //     return view('usuario.mensajes.create', compact('ruta'));
+    // }
+
+    public function crear($id)
     {
-        return view('admin.mensajes.create');
+        $punto = Punto::findOrFail($id);
+
+        return view('usuario.mensajes.create', compact('ruta'));
     }
 
     /**
@@ -44,28 +52,9 @@ class ControladorMensajes extends Controller
      */
     public function store(Request $request)
     {
-        // Guardamos el mensaje
-        // DB::table('mensajes')->insert([
-        //     "nombre"     => $request->input('nombre'),
-        //     "email"      => $request->input('email'),
-        //     "mensaje"    => $request->input('mensaje'),
-        //     // Carbon es un paquete que utiliza laravel para manejar fechas
-        //     "created_at" => Carbon::now(),
-        //     "updated_at" => Carbon::now(),
-        // ]);
+        Mensaje_Punto::create($request->all());
 
-        // Mensaje::create([
-        //     "nombre"     => $request->input('nombre'),
-        //     "email"      => $request->input('email'),
-        //     "mensaje"    => $request->input('mensaje'),
-        //     //   Carbon es un paquete que utiliza laravel para manejar fechas
-        //     "created_at" => Carbon::now(),
-        //     "updated_at" => Carbon::now(),
-        // ]);
-
-        Mensaje::create($request->all());
-
-        return redirect()->route('mensajes.create');
+        return redirect()->route('mensajes.index');
     }
 
     /**
@@ -77,7 +66,7 @@ class ControladorMensajes extends Controller
     public function show($id)
     {
         //$mensaje = DB::table('mensajes')->where('id', $id)->first();
-        $mensaje = Mensaje::findOrFail($id);
+        $mensaje = Mensaje_Punto::findOrFail($id);
         return view('admin.mensajes.show', compact('mensaje'));
         // El método finOrFail nos ayuda a detectar si se introduce un id que no existe y si lo detecta, falla y redirige a la vista error 404
     }
@@ -91,9 +80,9 @@ class ControladorMensajes extends Controller
     public function edit($id)
     {
         //$mensaje = DB::table('mensajes')->where('id', $id)->first();
-        $mensaje = Mensaje::findOrFail($id);
+        $mensaje = Mensaje_Punto::findOrFail($id);
 
-        return view('admin.mensajes.edit', compact('mensaje'));
+        return view('admin.mensajes.edit_punto', compact('mensaje'));
     }
 
     /**
@@ -105,7 +94,7 @@ class ControladorMensajes extends Controller
      */
     public function update(Request $request, $id)
     {
-        $mensaje = Mensaje::findOrFail($id);
+        $mensaje = Mensaje_Punto::findOrFail($id);
 
         $mensaje->update($request->all());
 
@@ -117,7 +106,7 @@ class ControladorMensajes extends Controller
         //     "updated_at" => Carbon::now(),
         // ]);
         // Redireccionamos a la vista mensajes.index
-        return redirect()->route('mensajes.index');
+        return redirect()->route('mensajes_puntos.index');
     }
 
     /**
@@ -128,10 +117,8 @@ class ControladorMensajes extends Controller
      */
     public function destroy($id)
     {
-        $mensaje = Mensaje::findOrFail($id)->delete();
+        $mensaje = Mensaje_Punto::findOrFail($id)->delete();
 
-        //DB::table('mensajes')->where('id', $id)->delete();
-
-        return redirect()->route('mensajes.index');
+        return back();
     }
 }

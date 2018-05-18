@@ -15,33 +15,47 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+// Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
-const app = new Vue({
-    el: '#app'
+// const app = new Vue({
+//     el: '#app'
+// });
+
+$(function(){
+	$('#comunidad').on('change', elegirCiudad);
 });
 
-// console.log('custom scripts');
+function elegirCiudad() {
+	var comunidad_id = $(this).val();
 
-// function mostrarCiudadSI(){
-//     var x = document.getElementById("numeroPoliza");
-//     x.style.display = "inline";  
-// }
+	if(! comunidad_id)
+		$('#ciudad').html('<option value="">Seleccione ciudad</option>');
+	// AJAX
 
-// function mostrarCiudadoNO(){
-//     var x = document.getElementById("numeroPoliza");
-//     x.style.display = "none";  
-// }
+	$.get('/api/comunidad/'+comunidad_id+'/ciudades', function(ciudades){
+		var html_select = '<option value="">Seleccione ciudad</option>';
+		for(var i=0; i<ciudades.length; ++i)
+			html_select += '<option value="'+ciudades[i].id+'">'+ciudades[i].nombre+'</option>'
+		$('#ciudad').html(html_select);
+	});
+}
 
-// $("#comunidad").change(function(event)
-// {
-// 	alert("SDFS");
-// 	$.get("ciudades/" + event.target.value + "", function(response, state)
-// 	{
-// 		$("#ciudad").empty();
-// 		for(i=0; i<response.length; i++)
-// 		{
-// 			$("#ciudad").append("<option value='"+response[i].id+"'> "+response[i].name+"</option>");
-// 		}
-// 	});
+// $(function(){
+// 	$('#ciudad').on('change', mostrarPuntos);
 // });
+
+// function mostrarPuntos() {
+// 	var ciudad_id = $(this).val();
+
+// 	if(! ciudad_id)
+// 		$('#insertarPuntos').html('<tr><td>No hay datos</td><td>No hay datos</td><td>No hay datos</td><td>No hay datos</td></tr>');
+// 	// AJAX
+
+// 	$.get('/api/ciudad/'+ciudad_id+'/puntos', function(puntos){
+// 		var html_select = '';
+// 		for(var i=0; i<puntos.length; ++i)
+// 			html_select += '<tr><td><input type="checkbox" name="puntos[]" value="'+puntos[i].id+'"></td><td>'+puntos[i].id+'</td><td>'+puntos[i].nombre+'</td><td>'+puntos[i].descripcion+'</td><td>'+puntos[i].coste+'</td></tr>'
+// 		$('#insertarPuntos').html(html_select);
+// 	});
+// }
+

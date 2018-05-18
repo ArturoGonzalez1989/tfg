@@ -2,15 +2,7 @@
 
 @section('contenido')
 
-{{-- @if(session()->has('info'))
-	<div class="alert alert-success">{{ session('info') }}</div>
-@endif --}}
-<main role="main">
-	<div class="row">
-		<div class="col-lg-2 navbar-dark bg-dark sidebar sidebar-sticky fixed-top" id="sidebar">
-            @include('partials.menu_admin') <!-- Incluimos el navbar vertical -->    
-        </div><!-- fin col-2 -->
-		<div class="col-10">
+
 			<div class="jumbotron jumbotron-fluid text-center mb-5">
 				<h1 class="display-4">Editar comunidad</h1>
 			</div> {{-- Jumbotron --}}
@@ -55,10 +47,5 @@
 		<button class="btn btn-info" type="submit">Enviar</button>
 		</form>	
 		</div>
-			
-		</div> {{-- fin col-10 --}}
-	</div> {{-- fin row --}}
-</main>
-
 
 @stop

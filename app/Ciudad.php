@@ -8,7 +8,7 @@ class Ciudad extends Model
 {
     protected $table = 'ciudades';
 
-    protected $fillable = ['nombre', 'descripcion', 'comunidad_id', 'portada'];
+    protected $fillable = ['nombre', 'descripcion', 'comunidad_id', 'coordenadas'];
     public $timestamps  = false;
 
     public function comunidad()

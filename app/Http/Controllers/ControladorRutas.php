@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Ciudad;
+use App\Comunidad;
+use App\Mensaje_Ruta;
 use App\Punto;
 use App\Ruta;
+use App\Tematica;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -16,9 +20,32 @@ class ControladorRutas extends Controller
      */
     public function index()
     {
-        $rutas = Ruta::all();
+        $rutas    = Ruta::all();
+        $mensajes = Mensaje_Ruta::all();
+        $puntos   = Punto::all();
 
-        return view('admin.rutas.index', compact('rutas'));
+        if (auth()->guest()) {
+            return view('usuario.rutas.index', compact('rutas', 'mensajes'));
+        } elseif (auth()->user()->role_id === 2) {
+            return view('usuario.rutas.index', compact('rutas', 'mensajes', 'puntos'));
+        } elseif (auth()->user()->role_id === 1) {
+            return view('admin.rutas.index', compact('rutas'));
+        }
+    }
+
+    public function mostrarPuntos($id)
+    {
+        return Punto::where('ciudad_id', $id)->get();
+    }
+
+    public function rutas_usuario($id)
+    {
+        $rutas     = Ruta::where('creada_por', $id)->get();
+        $mensajes  = Mensaje_Ruta::all();
+        $puntos    = Punto::all();
+        $tematicas = Tematica::all();
+
+        return view('usuario.rutas.rutas-usuario', compact('rutas', 'tematicas', 'mensajes', 'puntos'));
     }
 
     /**
@@ -28,7 +55,17 @@ class ControladorRutas extends Controller
      */
     public function create()
     {
-        return view('admin.rutas.create');
+        $ciudades    = Ciudad::all();
+        $comunidades = Comunidad::all();
+        $puntos      = Punto::all();
+
+        if (auth()->guest()) {
+            return view('usuario.rutas.create', compact('ciudades', 'comunidades'));
+        } elseif (auth()->user()->role_id === 2) {
+            return view('usuario.rutas.create', compact('ciudades', 'comunidades'));
+        } elseif (auth()->user()->role_id === 1) {
+            return view('admin.rutas.create', compact('ciudades', 'comunidades', 'puntos'));
+        }
     }
 
     /**
@@ -37,11 +74,34 @@ class ControladorRutas extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    // public function elegirPuntos(Request $request)
+    // {
+    //     $ruta = Ruta::create($request->all());
+
+    // }
+
     public function store(Request $request)
     {
-        Ruta::create($request->all());
+        $ruta = Ruta::create($request->all());
 
-        return redirect()->route('home');
+        // $ruta->puntos()->attach($request->puntos);
+
+        if ($request->hasFile('imagen')) {
+            $ruta->imagen = $request->file('imagen')->store('public');
+        }
+
+        $ruta->save();
+
+        $ciudades = Ciudad::all();
+        $mensajes = Mensaje_Ruta::all();
+        $puntos   = Punto::all();
+
+        return view('admin.rutas.elegirPuntos', compact('ruta', 'ciudades', 'puntos', 'mensajes'));
+        // if (auth()->user()->role_id === 1) {
+        //     return redirect()->route('rutas.index');
+        // } elseif (auth()->user()->role_id === 2) {
+        //     return redirect()->route('cuenta');
+        // }
     }
 
     /**
@@ -52,13 +112,17 @@ class ControladorRutas extends Controller
      */
     public function show($id)
     {
-        $ruta   = Ruta::findOrFail($id);
-        $puntos = Punto::all();
+        $ruta     = Ruta::findOrFail($id);
+        $puntos   = Punto::all();
+        $mensajes = Mensaje_Ruta::all();
 
-        if (auth()->user()->role_id === 1) {
-            return view('admin.rutas.show', compact('ruta', 'puntos'));
+        if (auth()->guest()) {
+            return view('usuario.rutas.show', compact('ruta', 'puntos', 'mensajes'));
+        } elseif (auth()->user()->role_id === 2) {
+            return view('usuario.rutas.show', compact('ruta', 'puntos', 'mensajes'));
+        } elseif (auth()->user()->role_id === 1) {
+            return view('admin.rutas.show', compact('ruta', 'puntos', 'mensajes'));
         }
-
     }
 
     /**
@@ -69,9 +133,12 @@ class ControladorRutas extends Controller
      */
     public function edit($id)
     {
-        $rutas = Ruta::findOrFail($id);
+        $ruta     = Ruta::findOrFail($id);
+        $ciudades = Ciudad::all();
+        $mensajes = Mensaje_Ruta::all();
+        $puntos   = Punto::all();
 
-        return view('admin.rutas.edit', compact('rutas'));
+        return view('admin.rutas.edit', compact('ruta', 'ciudades', 'puntos', 'mensajes'));
     }
 
     /**
@@ -83,11 +150,17 @@ class ControladorRutas extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rutas = Ruta::findOrFail($id);
+        $ruta = Ruta::findOrFail($id);
 
-        $rutas->update($request->all());
+        if ($request->hasFile('imagen')) {
+            $ruta->imagen = $request->file('imagen')->store('public');
+        }
 
-        return redirect()->route('admin.rutas.index');
+        $ruta->update($request->all());
+
+        $ruta->puntos()->sync($request->puntos);
+
+        return redirect()->route('rutas.index');
     }
 
     /**
@@ -98,8 +171,8 @@ class ControladorRutas extends Controller
      */
     public function destroy($id)
     {
-        $rutas = Ruta::findOrFail($id)->delete();
+        $ruta = Ruta::findOrFail($id)->delete();
 
-        return redirect()->route('admin.rutas.index');
+        return redirect()->route('rutas.index');
     }
 }

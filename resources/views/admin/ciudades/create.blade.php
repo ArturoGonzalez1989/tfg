@@ -1,18 +1,14 @@
 @extends('layout')
 @section('contenido')
 
-<main role="main">
-    <div class="jumbotron jumbotron-fluid text-center">
-        <div class="container">
-            <h1 class="display-4">
-                Crear nueva ciudad
-            </h1>
-        </div>
-    </div>
+<div class="jumbotron jumbotron-fluid text-center">
+    <h1>Crear nueva ciudad</h1>
+</div>
+
     <div class="container mt-5 pt-5">
         <div class="row justify-content-center">
             <div class="col-md-7">
-                <form method="POST" id="formulario" action="{{ route('ciudades.store') }}">
+                <form method="POST" id="formulario" action="{{ route('ciudades.store') }}" enctype="multipart/form-data">
                      {{ csrf_field() }}
                     <div class="row form-group">
                         <label class="col-form-label col-md-4" for="nombre">Nombre:</label>
@@ -43,9 +39,16 @@
                             </select>
                         </div>
                     </div>
+                    <div class="row form-group">
+                        <label class="col-form-label col-md-4" for="email">Coordenadas:</label>
+                        <div class="col-md-8">
+                            <input class="form-control" id="coordenadas" name="coordenadas" placeholder="x, x">
+                            </input>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="exampleInputFile">Elegir foto ciudad</label>
-                        <input type="file" class="form-control-file" id="portada" name="portada">
+                        <input type="file" class="form-control-file" id="imagen" name="imagen">
                       </div>
                     <button class="btn btn-info" type="submit">Enviar</button>
                 </form>

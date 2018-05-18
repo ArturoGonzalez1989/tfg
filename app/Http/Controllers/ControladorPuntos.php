@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Ciudad;
+use App\Mensaje_Punto;
 use App\Punto;
 use Illuminate\Http\Request;
 
@@ -40,9 +41,19 @@ class ControladorPuntos extends Controller
      */
     public function store(Request $request)
     {
-        Punto::create($request->all());
+        $punto = Punto::create($request->all());
 
-        return redirect()->route('puntos.index');
+        if ($request->hasFile('imagen')) {
+            $punto->imagen = $request->file('imagen')->store('public');
+        }
+
+        $punto->save();
+
+        if (auth()->user()->role_id === 1) {
+            return redirect()->route('puntos.index');
+        } elseif (auth()->user()->role_id === 2) {
+            return redirect()->route('cuenta');
+        }
     }
 
     /**
@@ -53,9 +64,17 @@ class ControladorPuntos extends Controller
      */
     public function show($id)
     {
-        $punto = Punto::findOrFail($id);
+        $punto           = Punto::findOrFail($id);
+        $ciudades        = Ciudad::all();
+        $mensajes_puntos = Mensaje_Punto::all();
 
-        return view('admin.puntos.show', compact('punto'));
+        if (auth()->guest()) {
+            return view('usuario.puntos.show', compact('punto', 'ciudades'));
+        } elseif (auth()->user()->role_id === 2) {
+            return view('usuario.puntos.show', compact('punto', 'ciudades'));
+        } elseif (auth()->user()->role_id === 1) {
+            return view('admin.puntos.show', compact('punto', 'mensajes_puntos'));
+        }
     }
 
     /**
@@ -82,6 +101,10 @@ class ControladorPuntos extends Controller
     public function update(Request $request, $id)
     {
         $punto = Punto::findOrFail($id);
+
+        if ($request->hasFile('imagen')) {
+            $punto->imagen = $request->file('imagen')->store('public');
+        }
 
         $punto->update($request->all());
 

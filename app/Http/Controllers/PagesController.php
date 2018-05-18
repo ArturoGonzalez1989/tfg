@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Ciudad;
 use App\Comunidad;
-use App\Mensaje;
+use App\Mensaje_Punto;
+use App\Mensaje_Ruta;
 use App\Punto;
 use App\Ruta;
+use App\Tematica;
 use App\User;
 
 class PagesController extends Controller
@@ -18,30 +20,71 @@ class PagesController extends Controller
 
     public function home()
     {
-        $usuarios    = User::all();
-        $rutas       = Ruta::all();
-        $mensajes    = Mensaje::all();
-        $puntos      = Punto::all();
-        $ciudades    = Ciudad::all();
-        $comunidades = Comunidad::all();
+        $usuarios        = User::all();
+        $rutas           = Ruta::all();
+        $mensajes_rutas  = Mensaje_Ruta::all();
+        $mensajes_puntos = Mensaje_Punto::all();
+        $puntos          = Punto::all();
+        $ciudades        = Ciudad::all();
+        $comunidades     = Comunidad::all();
+        $tematicas       = Tematica::all();
 
         if (auth()->guest()) {
-            $numRutas = $rutas->count();
-            return view('visitantes.index', compact('rutas', 'numRutas', 'puntos'));
+            return view('visitantes.index', compact('rutas', 'puntos', 'comunidades', 'tematicas', 'usuarios', 'ciudades'));
         } elseif (auth()->user()->role_id === 2) {
-            return view('usuario.index', compact('rutas', 'usuarios', 'mensajes', 'puntos'));
+            return view('visitantes.index', compact('rutas', 'usuarios', 'mensajes_rutas', 'puntos', 'comunidades', 'ciudades', 'tematicas'));
         } elseif (auth()->user()->role_id === 1) {
-            return view('admin.index', compact('rutas', 'usuarios', 'mensajes', 'puntos', 'comunidades', 'ciudades'));
+            return view('admin.index', compact('rutas', 'usuarios', 'mensajes_rutas', 'mensajes_puntos', 'puntos', 'comunidades', 'ciudades', 'tematicas'));
         }
     }
 
-    public function explorar()
+    public function cuenta()
     {
-        $rutas    = Ruta::all();
-        $puntos   = Punto::all();
-        $ciudades = Ciudad::all();
+        $usuarios        = User::all();
+        $rutas           = Ruta::all();
+        $mensajes_rutas  = Mensaje_Ruta::all();
+        $mensajes_puntos = Mensaje_Punto::all();
+        $puntos          = Punto::all();
+        $ciudades        = Ciudad::all();
+        $comunidades     = Comunidad::all();
+        $tematicas       = Tematica::all();
 
-        return view('usuario.explorar', compact('rutas', 'puntos', 'ciudades'));
+        if (auth()->user()->role_id === 2) {
+            return view('usuario.index', compact('rutas', 'usuarios', 'mensajes', 'puntos', 'comunidades', 'ciudades', 'tematicas'));
+        } elseif (auth()->user()->role_id === 1) {
+            return view('admin.index', compact('rutas', 'usuarios', 'mensajes_rutas', 'mensajes_puntos', 'puntos', 'comunidades', 'ciudades', 'tematicas'));
+        }
+    }
+
+    public function verRutas(Request $request)
+    {
+        $req       = $request->input('ciudad');
+        $ciudad    = Ciudad::where('id', $req)->get();
+        $rutas     = Ruta::where('ciudad_id', $req)->get();
+        $tematicas = Tematica::all();
+        $puntos    = Punto::all();
+        $mensajes  = Mensaje_Ruta::all();
+
+        return view('usuario.ciudades.ver-rutas-ciudad', compact('ciudad', 'rutas', 'tematicas', 'puntos', 'mensajes'));
+    }
+
+    public function recomendarRutas()
+    {
+        $rutas     = Ruta::all();
+        $mensajes  = Mensaje_Ruta::all();
+        $tematicas = Tematica::all();
+        $puntos    = Punto::all();
+
+        return view('usuario.rutas.recomendar-rutas', compact('rutas', 'mensajes', 'tematicas', 'puntos'));
+    }
+
+    public function explorar_comunidades()
+    {
+        $rutas       = Ruta::all();
+        $puntos      = Punto::all();
+        $comunidades = Comunidad::all();
+
+        return view('usuario.comunidades.explorar_comunidades', compact('rutas', 'puntos', 'comunidades'));
     }
 
     public function base_legal()
@@ -49,12 +92,8 @@ class PagesController extends Controller
         return view('base_legal');
     }
 
-    // public function mensajes(CreateMessageRequest $request) // Validación del formulario en el lado del servidor
-
-    // {
-    //     $data = $request->all(); // Devuelve un array
-    //     return redirect()->route('contacto');
-    //     // Una vez que hemos validado y guardado la información le damos una respuesta al usuario con los responses.
-    //     // responses
-    // }
+    public function contacto()
+    {
+        return view('contacto');
+    }
 }

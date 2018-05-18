@@ -18,10 +18,16 @@ class ControladorCiudades extends Controller
      */
     public function index()
     {
-        $comunidades = Ciudad::all();
+        $comunidades = Comunidad::all();
         $ciudades    = Ciudad::all();
+        $rutas       = Ruta::all();
+        $puntos      = Punto::all();
 
-        return view('admin.ciudades.index', compact('ciudades', 'comunidades'));
+        if (auth()->user()->role_id === 1) {
+            return view('admin.ciudades.index', compact('ciudades', 'comunidades', 'rutas', 'puntos'));
+        } elseif (auth()->user()->role_id === 2) {
+            return view('usuario.ciudades.index', compact('ciudades', 'comunidades', 'rutas', 'puntos'));
+        }
     }
 
     /**
@@ -29,6 +35,20 @@ class ControladorCiudades extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function byComunidad($id)
+    {
+        return Ciudad::where('comunidad_id', $id)->get();
+    }
+
+    // public function verRutas(Request $request)
+    // {
+    //     $req    = $request->input('ciudad');
+    //     $ciudad = Ciudad::where('id', $req)->get();
+
+    //     return view('usuario.ciudades.ver-rutas-ciudad', compact('ciudad'));
+    // }
+
     public function create()
     {
         $comunidades = Comunidad::all();
@@ -43,7 +63,15 @@ class ControladorCiudades extends Controller
      */
     public function store(Request $request)
     {
-        Ciudad::create($request->all());
+        $ciudad = Ciudad::create($request->all());
+
+        // $ruta->puntos()->attach($request->puntos);
+
+        if ($request->hasFile('imagen')) {
+            $ciudad->imagen = $request->file('imagen')->store('public');
+        }
+
+        $ciudad->save();
 
         return redirect()->route('ciudades.index');
     }
@@ -59,7 +87,13 @@ class ControladorCiudades extends Controller
         $ciudad = Ciudad::findOrFail($id);
         $rutas  = Ruta::all();
         $puntos = Punto::all();
-        return view('admin.ciudades.show', compact('ciudad', 'rutas', 'puntos'));
+
+        if (auth()->user()->role_id === 1) {
+            return view('admin.ciudades.show', compact('ciudad', 'rutas', 'puntos'));
+        } elseif (auth()->user()->role_id === 2) {
+            return view('usuario.ciudades.show', compact('rutas', 'usuarios', 'mensajes', 'puntos', 'comunidades', 'ciudad'));
+        }
+
     }
 
     /**
@@ -84,12 +118,14 @@ class ControladorCiudades extends Controller
      */
     public function update(ActualizarCiudadRequest $request, $id)
     {
-        // return $request->all();
         $ciudad = Ciudad::findOrFail($id);
+
+        if ($request->hasFile('imagen')) {
+            $ciudad->imagen = $request->file('imagen')->store('public');
+        }
 
         $ciudad->update($request->all());
 
-        //return back()->with('info', 'actualizado');
         return redirect()->route('ciudades.index');
     }
 

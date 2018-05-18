@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand-lg flex-lg-column text-center">
-    <div class="mt-4">
+    <div class="mt-4 pb-lg-4 d-none d-lg-block">
         <p class="text-white text-left align-bottom">{{ auth()->user()->nombre }}</p>  
-        <img src="/img/admin.png" alt="foto admin" class="img-thumbnail rounded-circle" width="60px">
+        <img src="/img/admin.png" alt="foto admin" class="img-thumbnail rounded-circle mb-3" width="40px">
+        <p><a class="text-white mb-5" href="/logout">Cerrar sesión</a></p>
     </div>
-    <a class="text-white mb-5" href="/logout">Cerrar sesión</a>
 
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,6 +11,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav flex-lg-column">
+            <a class="nav-item nav-link lead py-3" data-scroll href="/logout">Cerrar sesión</a>
             <a class="nav-item nav-link lead" data-scroll href="/">Inicio</a>
             <a class="nav-item nav-link lead py-3" href="" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapseExample">Usuarios</a>
             <div class="collapse" id="collapse1">
@@ -30,8 +31,8 @@
             
             <a class="nav-item nav-link lead py-3" href="" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" aria-controls="collapseExample">Mensajes</a>
             <div class="collapse" id="collapse4">
-                <a class="nav-item nav-link lead py-3 pl-4" data-scroll href=" {{ route('mensajes.create') }}">Crear mensaje</a>
-                <a class="nav-item nav-link lead py-3 pl-4" data-scroll href=" {{ route('mensajes.index') }}">Lista de mensajes</a>
+  {{--               <a class="nav-item nav-link lead py-3 pl-4" data-scroll href=" {{ route('mensajes.create') }}">Crear mensaje</a>
+                <a class="nav-item nav-link lead py-3 pl-4" data-scroll href=" {{ route('mensajes.index') }}">Lista de mensajes</a> --}}
             </div>
             <a class="nav-item nav-link lead py-3" href="" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" aria-controls="collapseExample">Ciudades</a>
             <div class="collapse" id="collapse5">

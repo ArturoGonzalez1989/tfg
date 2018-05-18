@@ -15,14 +15,15 @@
   	</div>
 </div>
 <div class="container">
-	<h2 class="display-4 text-center my-5">Ciudades</h2>
-	<div class="card-columns" id="explorarCiudades">
-		@foreach ($ciudades as $ciudad)
-	        <a href="{{route('ciudades.show', $ciudad->id) }}">
+	<h2 class="display-4 text-center my-5">Comunidades</h2>
+	<div class="card-columns" id="explorarComunidades">
+		<?php $comunidades = $comunidades->sortBy('nombre'); ?>
+		@foreach ($comunidades as $comunidad)
+	        <a href="{{route('comunidades.show', $comunidad->id) }}">
 	        	<div class="card" style="width: 19rem;">
 					<img class="card-img-top" src="http://placehold.it/300x300" alt="Card image cap">
 					<div class="card-body">
-						<h5 class="card-title">{{ $ciudad->nombre }}</h5>
+						<h5 class="card-title">{{ $comunidad->nombre }}</h5>
 					</div>
 				</div>
 		    </a>

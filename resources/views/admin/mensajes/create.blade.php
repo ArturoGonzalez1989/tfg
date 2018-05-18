@@ -24,9 +24,6 @@
                     Formulario de contacto
                 </h1>
                 <hr class="bg-info">
-                    <p class="pb-0 mb-0">
-                        Te invitamos a contactarnos, te responderemos a la brevedad.
-                    </p>
                     <p class="text-danger small pt-0 mt-0">
                         *Todos los campos son obligatorios
                     </p>
@@ -37,7 +34,7 @@
                                 Nombre:
                             </label>
                             <div class="col-md-8">
-                                <input class="form-control" id="nombre" name="nombre" required type="text" value="{{ old('nombre') }}">
+                                <input class="form-control" id="nombre" name="nombre" required type="hidden" value="{{ auth->user()->nombre }}">
                                 </input>
                                 {!! $errors->first('nombre', '<span class="text-danger">:message</span>') !!} 
                                 <!-- 

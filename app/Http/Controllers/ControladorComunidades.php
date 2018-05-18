@@ -19,7 +19,11 @@ class ControladorComunidades extends Controller
     {
         $comunidades = Comunidad::all();
 
-        return view('admin.comunidades.index', compact('comunidades'));
+        if (auth()->user()->role_id === 1) {
+            return view('admin.comunidades.index', compact('comunidades'));
+        } elseif (auth()->user()->role_id === 2) {
+            return view('usuario.comunidades.index', compact('comunidades'));
+        }
     }
 
     /**
