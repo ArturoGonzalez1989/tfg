@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Ciudad;
 use App\Comunidad;
 use App\Http\Requests\ActualizarCiudadRequest;
+use App\Mensaje_Ruta;
 use App\Punto;
 use App\Ruta;
+use App\Tematica;
 use Illuminate\Http\Request;
 
 class ControladorCiudades extends Controller
@@ -28,6 +30,18 @@ class ControladorCiudades extends Controller
         } elseif (auth()->user()->role_id === 2) {
             return view('usuario.ciudades.index', compact('ciudades', 'comunidades', 'rutas', 'puntos'));
         }
+    }
+
+    public function mostrarRutas($id)
+    {
+        // $tematicas = Tematica::where('id', $tema)->get();
+        $rutas = Ruta::where('ciudad_id', $id)->get();
+        // $tematicas = Ciudad::where('id', $id)->get();
+        // $rutas = Ruta::all();
+        // $rutas = DB::table('rutas')->join('rutas_has_tematicas', 'rutas.id', '=', 'rutas_has_tematicas.ruta_id')->get();
+        // $rutas = Ruta::all()->join('rutas_has_tematicas', 'rutas.id', '=', 'rutas_has_tematicas.ruta_id')->get();
+        // dd($rutas);
+        return $rutas;
     }
 
     /**
@@ -84,14 +98,16 @@ class ControladorCiudades extends Controller
      */
     public function show($id)
     {
-        $ciudad = Ciudad::findOrFail($id);
-        $rutas  = Ruta::all();
-        $puntos = Punto::all();
+        $ciudad    = Ciudad::findOrFail($id);
+        $rutas     = Ruta::where('ciudad_id', $id)->get();
+        $puntos    = Punto::all();
+        $tematicas = Tematica::all();
+        $mensajes  = Mensaje_Ruta::all();
 
         if (auth()->user()->role_id === 1) {
             return view('admin.ciudades.show', compact('ciudad', 'rutas', 'puntos'));
         } elseif (auth()->user()->role_id === 2) {
-            return view('usuario.ciudades.show', compact('rutas', 'usuarios', 'mensajes', 'puntos', 'comunidades', 'ciudad'));
+            return view('usuario.ciudades.show', compact('rutas', 'usuarios', 'mensajes', 'tematicas', 'mensajes', 'puntos', 'comunidades', 'ciudad'));
         }
 
     }

@@ -16,4 +16,5 @@
 // });
 
 Route::get('/comunidad/{id}/ciudades', 'ControladorCiudades@byComunidad');
-Route::get('/ciudad/{id}/puntos', 'ControladorRutas@mostrarPuntos');
+// Route::get('/ciudad/{id}/puntos', 'ControladorRutas@mostrarPuntos');
+Route::get('/ciudad/{id}/rutas', 'ControladorCiudades@mostrarRutas');

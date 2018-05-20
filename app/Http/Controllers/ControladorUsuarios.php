@@ -24,6 +24,7 @@ class ControladorUsuarios extends Controller
     {
         $this->middleware('auth');
         $this->middleware('roles:admin', ['except' => ['edit', 'show']]);
+        $this->middleware('roles:usuario', ['except' => ['edit', 'show']]);
     }
 
     public function index()
@@ -88,7 +89,7 @@ class ControladorUsuarios extends Controller
         if (auth()->user()->role_id === 1) {
             return view('admin.usuarios.show', compact('usuario', 'rutas', 'mensajes_rutas', 'mensajes_puntos', 'puntos', 'tematicas'));
         } elseif (auth()->user()->role_id === 2) {
-            return view('usuario.usuarios.show', compact('usuario', 'rutas', 'mensajes', 'puntos'));
+            return view('usuario.usuarios.show', compact('usuario', 'rutas', 'mensajes_rutas', 'mensajes_puntos', 'puntos'));
         }
     }
 
@@ -106,7 +107,7 @@ class ControladorUsuarios extends Controller
         if (auth()->user()->role_id === 1) {
             return view('admin.usuarios.edit', compact('usuario', 'tematicas'));
         } elseif (auth()->user()->role_id === 2) {
-            return view('usuario.usuarios.edit', compact('usuario'));
+            return view('usuario.usuarios.edit', compact('usuario', 'tematicas'));
         }
 
     }
@@ -133,7 +134,7 @@ class ControladorUsuarios extends Controller
         if (auth()->user()->role_id === 1) {
             return redirect()->route('usuarios.index');
         } elseif (auth()->user()->role_id === 2) {
-            return redirect()->route('usuarios.show');
+            return redirect()->route('cuenta');
         }
     }
 

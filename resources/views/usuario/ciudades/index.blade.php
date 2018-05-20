@@ -3,7 +3,7 @@
 @section('contenido')
 
 <div class="jumbotron jumbotron-fluid text-center mb-5">
-	<h1 class="display-4">Ciudades</h1>
+	<h1>Todas las ciudades</h1>
 </div> {{-- Jumbotron --}}
 
 <div class="container">

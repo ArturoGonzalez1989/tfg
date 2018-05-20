@@ -3,8 +3,18 @@
 @section('contenido')
 
 <div class="jumbotron jumbotron-fluid text-center mb-5">
-	<h1 class="display-4">Rutas más votadas</h1>
+	<h1>Rutas más votadas</h1>
 </div> {{-- Jumbotron --}}
+
+<div class="container py-5 text-center">
+  <select name="" id="">
+  <option value="">Las rutas más votadas</option>
+  <option value="">Las rutas más visitadas</option>
+  <option value="">Las rutas con más puntos de interés</option>
+  <option value="">Las rutas más comentadas</option>
+</select>
+</div>
+
 
 <?php $rutas = $rutas->sortByDesc('votos'); ?>
 <div class="container">

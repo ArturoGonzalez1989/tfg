@@ -7,8 +7,14 @@
 	<h1 class="display-4">Mensajes</h1>
 </div> {{-- Jumbotron --}}
 <div class="container">
-	<p class="h4">Mensajes en rutas:</p>
-	<table class="table table-hover" width="100%" border="1">
+	
+	@if( $mensajes->pluck('ruta')->pluck('id')->count() == 0 )
+    	<p class="h4 text-center">No hay mensajes</p>
+			
+
+    	@else
+    	<p class="h4">Mensajes en rutas:</p>
+    	<table class="table table-hover" width="100%" border="1">
 	<thead class="thead-light">
 		<tr>
 			<th scope="col">ID</th>
@@ -48,6 +54,9 @@
 		@endforeach
 	</tbody>
 </table>
+			
+    	@endif
+	
 </div>
 
 @stop

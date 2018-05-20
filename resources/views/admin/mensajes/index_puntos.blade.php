@@ -7,7 +7,10 @@
 	<h1 class="display-4">Mensajes</h1>
 </div> {{-- Jumbotron --}}
 <div class="container">
-	<p class="h4">Mensajes en puntos de interés:</p>
+	@if( $mensajes->pluck('punto')->pluck('id')->count() == 0 )
+    	<p class="h4 text-center">No hay mensajes</p>
+	@else
+		<p class="h4">Mensajes en puntos de interés:</p>
 	<table class="table table-hover" width="100%" border="1">
 	<thead class="thead-light">
 		<tr>
@@ -48,6 +51,8 @@
 		@endforeach
 	</tbody>
 </table>
+	@endif
+	
 </div>
 
 

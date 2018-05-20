@@ -40,7 +40,7 @@ class ControladorRutas extends Controller
 
     public function rutas_usuario($id)
     {
-        $rutas     = Ruta::where('creada_por', $id)->get();
+        $rutas     = Ruta::where('creador_id', $id)->get();
         $mensajes  = Mensaje_Ruta::all();
         $puntos    = Punto::all();
         $tematicas = Tematica::all();
@@ -96,12 +96,12 @@ class ControladorRutas extends Controller
         $mensajes = Mensaje_Ruta::all();
         $puntos   = Punto::all();
 
-        return view('admin.rutas.elegirPuntos', compact('ruta', 'ciudades', 'puntos', 'mensajes'));
-        // if (auth()->user()->role_id === 1) {
-        //     return redirect()->route('rutas.index');
-        // } elseif (auth()->user()->role_id === 2) {
-        //     return redirect()->route('cuenta');
-        // }
+        if (auth()->user()->role_id === 1) {
+            return view('admin.rutas.elegirPuntos', compact('ruta', 'ciudades', 'puntos', 'mensajes'));
+        } elseif (auth()->user()->role_id === 2) {
+            return view('usuario.rutas.elegirPuntos', compact('ruta', 'ciudades', 'puntos', 'mensajes'));
+        }
+
     }
 
     /**
@@ -173,6 +173,6 @@ class ControladorRutas extends Controller
     {
         $ruta = Ruta::findOrFail($id)->delete();
 
-        return redirect()->route('rutas.index');
+        return back();
     }
 }

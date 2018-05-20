@@ -18,9 +18,11 @@ class ControladorComunidades extends Controller
     public function index()
     {
         $comunidades = Comunidad::all();
+        $puntos      = Punto::all();
+        $rutas       = Ruta::all();
 
         if (auth()->user()->role_id === 1) {
-            return view('admin.comunidades.index', compact('comunidades'));
+            return view('admin.comunidades.index', compact('comunidades', 'rutas', 'puntos'));
         } elseif (auth()->user()->role_id === 2) {
             return view('usuario.comunidades.index', compact('comunidades'));
         }

@@ -3,9 +3,7 @@
 
 <div class="jumbotron jumbotron-fluid text-center">
     <div class="container">
-        <h1 class="display-4">
-            Crear nueva ruta
-        </h1>
+        <h1>Crear nueva ruta</h1>
     </div>
 </div>
 
@@ -54,7 +52,8 @@
                         <div class="col-sm-10">
                             <input type="file" class="form-control-file" id="imagen" name="imagen">
                         </div>
-                      </div>
+                    </div>
+                    <input type="hidden" name="creador_id" value="{{ auth()->user()->id }}">
                     <button class="btn btn-info" type="submit">
                         Enviar
                     </button>

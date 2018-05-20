@@ -10,9 +10,10 @@
 	<thead class="thead-light">
 		<tr>
 			<th scope="col">ID</th>
-			<th scope="col">Bandera</th>
 			<th scope="col">Nombre</th>
 			<th scope="col">Descripción</th>
+			<th scope="col">Rutas</th>
+			<th scope="col">PI</th>
 			<th scope="col">Acciones</th>
 		</tr>
 	</thead>
@@ -20,9 +21,26 @@
 		@foreach ($comunidades as $comunidad)
 			<tr>
 				<td>{{ $comunidad->id }}</td>
-				<td width="100"><img class="img-fluid" width="100" height="100" src="/img/banderas/{{ $comunidad->bandera }}" alt=""></td>
 				<td>{{ $comunidad->nombre }}</td>
-				<td>{{ $comunidad->descripcion }}</td>
+				<td class="w-50">{{ $comunidad->descripcion }}</td>
+				<td>
+					<?php $contadorR = 0; ?>
+					@foreach( $rutas as $ruta )
+						@if( $ruta->ciudad->comunidad->id == $comunidad->id )
+							<?php $contadorR = $contadorR + 1; ?>
+						@endif
+					@endforeach
+					{{ $contadorR }}
+				</td>
+				<td>
+					<?php $contadorP = 0; ?>
+					@foreach( $puntos as $punto )
+						@if( $punto->ciudad->comunidad->id == $comunidad->id )
+							<?php $contadorP = $contadorP + 1; ?>
+						@endif
+					@endforeach
+					{{ $contadorP }}
+				</td>
 				<td class="text-center">
 					<div class="btn-group">
 						<a href="{{route('comunidades.show', $comunidad->id) }}" class="btn-sm btn-info sin_subrayar mr-1">Ver</a>

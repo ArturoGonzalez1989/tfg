@@ -40,22 +40,16 @@ function elegirCiudad() {
 	});
 }
 
-// $(function(){
-// 	$('#ciudad').on('change', mostrarPuntos);
-// });
+$(".filtrar").on("change", function(){
+	var ciudad = $('#ciudad').val();
+	var tematica = $(this).val();
+	// alert(tematica);
 
-// function mostrarPuntos() {
-// 	var ciudad_id = $(this).val();
 
-// 	if(! ciudad_id)
-// 		$('#insertarPuntos').html('<tr><td>No hay datos</td><td>No hay datos</td><td>No hay datos</td><td>No hay datos</td></tr>');
-// 	// AJAX
-
-// 	$.get('/api/ciudad/'+ciudad_id+'/puntos', function(puntos){
-// 		var html_select = '';
-// 		for(var i=0; i<puntos.length; ++i)
-// 			html_select += '<tr><td><input type="checkbox" name="puntos[]" value="'+puntos[i].id+'"></td><td>'+puntos[i].id+'</td><td>'+puntos[i].nombre+'</td><td>'+puntos[i].descripcion+'</td><td>'+puntos[i].coste+'</td></tr>'
-// 		$('#insertarPuntos').html(html_select);
-// 	});
-// }
-
+	$(".ruta-card").addClass("d-none");
+	$(".tematica"+tematica).removeClass("d-none");
+	if(tematica == 0){
+		$(".ruta-card").removeClass("d-none");
+	}
+});
+	

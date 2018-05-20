@@ -4,13 +4,14 @@
 
 @include('partials.hero')
 
-<div class="container pt-5">
+<div class="container my-5 pt-5 px-5 border">
 	<div class="pb-5">
-		<h2>Buscador de ciudades</h2>
+		<h2 class="text-center pb-2">Buscador de ciudades</h2>
 		@include('partials.selects-dinamicos')
 	</div>
+</div>
 	
-
+<div class="container">
 	<div class="row">
 		<div class="col-4">
 			<a href="{{ route('ciudades.index') }}">
@@ -28,7 +29,19 @@
 					<div class="contenedor">
 						<img class="imagen img-thumbnail" src="/img/secciones/recomendar.png" alt="recomandar rutas">
 						<div class="overlay">
-						    <div class="texto">Recomandarme rutas</div>
+						    <div class="texto">Recomendarme rutas</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="contenedor">
+				<a href="{{ route('rutas.index') }}">
+					<div class="contenedor">
+						<img class="imagen img-thumbnail" src="/img/secciones/recomendar.png" alt="recomandar rutas">
+						<div class="overlay">
+						    <div class="texto">Ver todas las rutas</div>
 						</div>
 					</div>
 				</a>
@@ -49,7 +62,7 @@
 				<a href="{{ route('rutas_usuario', Auth::user()->id) }}">
 					<img class="imagen img-thumbnail" src="/img/secciones/ver-mis-rutas.png" alt="crear ruta">
 					<div class="overlay">
-					    <div class="texto">Ver mis rutas</div>
+					    <div class="texto">Ver mis rutas creadas</div>
 					</div>
 				</a>
 			</div>

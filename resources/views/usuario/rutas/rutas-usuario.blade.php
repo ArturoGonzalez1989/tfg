@@ -3,34 +3,37 @@
 @section('contenido')
 
 <div class="jumbotron jumbotron-fluid text-center mb-5">
-  <h1 class="lead encabezado-1">Tus rutas</h1>
+  <h1>Tus rutas</h1>
 </div> {{-- Jumbotron --}}
-
-{{-- @foreach($rutas as $ruta)
-	@foreach($ruta->tematicas as $tematica)
-		{{$tematica->nombre}}
-	@endforeach
-@endforeach --}}
 
 <?php $rutas = $rutas->sortByDesc('votos'); ?>
 <div class="container">
- @foreach($tematicas as $tematica)
-  	@foreach($rutas as $ruta)
-		@foreach($ruta->tematicas as $i)
-			@if($tematica->id == $i->id)
-				<h3 class="pt-3">Rutas de {{ $tematica->nombre }}</h3>
-    			<hr class="pb-4">
-    			<div class="card mb-4">
+  @foreach($rutas as $ruta)
+    <div class="card mb-4">
               <div class="card-header">
                 <div class="row">
                   <div class="col-12 col-sm-7 col-md-8 text-center text-sm-left">
-                    <span class="h4 text-left">{{ $ruta->nombre }}</span>
+                    <span class="h4 text-left">
+                      <a href="{{route('rutas.show', $ruta->id) }}" class="sin_subrayar mr-1">{{ $ruta->nombre }}</a>
+                      <div class="btn-group">
+                        <form action="{{ route('rutas.edit', $ruta->id) }}">
+                          {!! csrf_field() !!}
+                          {!! method_field('PUT') !!}
+                          <button type="submit" class="btn-sm btn-primary mr-1">Editar</button>
+                        </form>
+                        <form method="POST" action="{{route('rutas.destroy', $ruta->id) }}">
+                          {!! csrf_field() !!}
+                          {!! method_field('DELETE') !!}
+                          <button type="submit" class="btn-sm btn-danger">Eliminar</button>
+                        </form>
+                      </div>
+                    </span>
                   </div>
                   <div class="col-12 col-sm-5 col-md-4 text-center text-sm-right">
                     @if($ruta->coste != 0)
-                  <span class="btn btn-warning btn">Coste estimado: {{ $var }}€</span>
+                  <span class="p-3">Coste estimado: {{ $var }}€</span>
                 @else
-                  <span class="btn btn-warning ">Coste no disponible</span>
+                  <span class="p-2 bg-warning">Coste no disponible</span>
                 @endif
                   </div>
                 </div>
@@ -66,10 +69,7 @@
                 </div>
               </div>
             </div>
-			@endif
-		@endforeach
-	@endforeach
-@endforeach
+  @endforeach
   	
  </div>
    

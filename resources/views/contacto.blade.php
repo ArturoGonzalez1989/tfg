@@ -1,11 +1,6 @@
 @extends('layout')
 @section('contenido')
 
-{{-- <header>
-    @include('partials.menu') <!-- Incluimos el navbar -->
-</header> --}}
-
-<main role="main">
     <div class="jumbotron jumbotron-fluid text-center">
         <div class="container">
             <h1 class="display-4">
@@ -27,7 +22,7 @@
                     <p class="text-danger small pt-0 mt-0">
                         *Todos los campos son obligatorios
                     </p>
-                    <form method="POST" id="formulario" action="{{ route('mensajes.store') }}">
+                    <form method="POST" id="formulario" action="">
                          {{ csrf_field() }}
                         <div class="row form-group">
                             <label class="col-form-label col-md-4" for="nombre">
@@ -76,5 +71,4 @@
             </div>
         </div>
     </div>
-</main>
 @stop

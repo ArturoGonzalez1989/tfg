@@ -2,7 +2,7 @@
     <div class="mt-4 pb-lg-4 d-none d-lg-block">
         <p class="text-white text-left align-bottom">{{ auth()->user()->nombre }}</p>  
         <img src="/img/admin.png" alt="foto admin" class="img-thumbnail rounded-circle mb-3" width="40px">
-        <p><a class="text-white mb-5" href="/logout">Cerrar sesión</a></p>
+        <p><a class="text-danger mb-5" href="/logout">Cerrar sesión</a></p>
     </div>
 
 
@@ -11,7 +11,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav flex-lg-column">
-            <a class="nav-item nav-link lead py-3" data-scroll href="/logout">Cerrar sesión</a>
+            <a class="nav-item nav-link lead py-3 text-danger d-lg-none" data-scroll href="/logout">Cerrar sesión</a>
             <a class="nav-item nav-link lead" data-scroll href="/">Inicio</a>
             <a class="nav-item nav-link lead py-3" href="" data-toggle="collapse" data-target="#collapse1" aria-expanded="false" aria-controls="collapseExample">Usuarios</a>
             <div class="collapse" id="collapse1">

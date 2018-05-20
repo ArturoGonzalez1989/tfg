@@ -3,14 +3,15 @@
 @section('contenido')
 
 <div class="jumbotron jumbotron-fluid text-center mb-5">
-  <h1 class="lead encabezado-1">Hola {{ Auth::user()->nombre }}, aquí tienes unas recomendaciones basadas en tus gustos </h1>
+  <h2>Hola {{ Auth::user()->nombre }}, aquí tienes algunas recomendaciones basadas en tus gustos sobre</h2>
+  <h3>{{ Auth::user()->tematicas->pluck('nombre')->implode(' - ') }}</h3>
 </div> {{-- Jumbotron --}}
 
 <?php $rutas = $rutas->sortByDesc('votos'); ?>
 <div class="container">
   @foreach( Auth::user()->tematicas as $tematica)
-    <h3 class="pt-3">Rutas de {{ $tematica->nombre }}</h3>
-    <hr class="pb-4">
+    <h3 class="pt-5">Rutas de {{ $tematica->nombre }}</h3>
+      <hr class="separador-titulo text-left">
     @foreach ($rutas as $ruta)
       <?php $var = $ruta->puntos->sum('coste'); ?>
         @foreach($ruta->tematicas as $i)

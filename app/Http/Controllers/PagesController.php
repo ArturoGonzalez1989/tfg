@@ -10,6 +10,7 @@ use App\Punto;
 use App\Ruta;
 use App\Tematica;
 use App\User;
+use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {

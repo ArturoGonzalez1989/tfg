@@ -17,6 +17,8 @@ class ComprobarRoles
     {
         if (auth()->user()->role_id === 1) {
             return $next($request);
+        } elseif (auth()->user()->role_id === 2) {
+            return $next($request);
         }
         return redirect('/');
     }
