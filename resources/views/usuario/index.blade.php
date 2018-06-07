@@ -13,7 +13,7 @@
 	
 <div class="container">
 	<div class="row">
-		<div class="col-4">
+		<div class="col-4 mb-3">
 			<a href="{{ route('ciudades.index') }}">
 			<div class="contenedor">
 				<img class="imagen img-thumbnail" src="/img/secciones/ciudades.png" alt="ver ciudades">
@@ -62,7 +62,7 @@
 				<a href="{{ route('rutas_usuario', Auth::user()->id) }}">
 					<img class="imagen img-thumbnail" src="/img/secciones/ver-mis-rutas.png" alt="crear ruta">
 					<div class="overlay">
-					    <div class="texto">Ver mis rutas creadas</div>
+					    <div class="texto">Mis rutas</div>
 					</div>
 				</a>
 			</div>

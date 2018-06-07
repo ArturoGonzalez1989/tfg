@@ -20,7 +20,9 @@ Route::get('recomendar-rutas', ['as' => 'recomendar-rutas', 'uses' => 'PagesCont
 Route::get('contacto', ['as' => 'contacto', 'uses' => 'PagesController@contacto']);
 
 Route::get('rutas_usuario/{id}', ['as' => 'rutas_usuario', 'uses' => 'ControladorRutas@rutas_usuario']);
-Route::get('mensajes/crear/{id}', ['as' => 'mensajes.crear', 'uses' => 'ControladorMensajes@crear']);
+Route::get('mensajes/ruta/{id}/crear', ['as' => 'mensajes.ruta.crear', 'uses' => 'ControladorMensajesRutas@crear']);
+Route::get('mensajes/punto/{id}/crear', ['as' => 'mensajes.punto.crear', 'uses' => 'ControladorMensajesPuntos@crear']);
+Route::get('rutas/ordenadas/{id}', ['as' => 'rutas.ordenadas', 'uses' => 'ControladorRutas@ordenadas']);
 // Route::get('explorar_ciudades', ['as' => 'explorar_ciudades', 'uses' => 'PagesController@explorar_ciudades']);
 // Route::get('explorar_comunidades', ['as' => 'explorar_comunidades', 'uses' => 'PagesController@explorar_comunidades']);
 

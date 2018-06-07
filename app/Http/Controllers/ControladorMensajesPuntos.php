@@ -27,6 +27,13 @@ class ControladorMensajesPuntos extends Controller
         return view('admin.mensajes.index_puntos', compact('mensajes'));
     }
 
+    public function crear($id)
+    {
+        $punto = Punto::findOrFail($id);
+
+        return view('usuario.mensajes_puntos.create', compact('punto'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -36,13 +43,6 @@ class ControladorMensajesPuntos extends Controller
     // {
     //     return view('usuario.mensajes.create', compact('ruta'));
     // }
-
-    public function crear($id)
-    {
-        $punto = Punto::findOrFail($id);
-
-        return view('usuario.mensajes.create', compact('ruta'));
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -54,7 +54,7 @@ class ControladorMensajesPuntos extends Controller
     {
         Mensaje_Punto::create($request->all());
 
-        return redirect()->route('mensajes.index');
+        return redirect()->route('puntos.show', $request->input('punto_id'));
     }
 
     /**

@@ -23,8 +23,38 @@ function myMap() {
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqs-4rD_7XYuZ5KQnVxR9NgnrKJPhCbUc&callback=myMap"></script>
 
-	<h2 class="py-5 text-center">Rutas en <a class="sin_subrayar" href="{{route('ciudades.show', $ciudad->first()->id) }}">{{ $ciudad->first()->nombre}} <img class="img-fluid border" width="50px" src="/img/banderas/{{ $ciudad->first()->comunidad->bandera }}" alt=""></h2>
-	</a>
+	<h2 class="py-5 text-center">Rutas en <a href="" class="badge badge-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
+  {{ $ciudad->first()->nombre}}
+</a></h2>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{ $ciudad->first()->nombre}} ({{ $ciudad->first()->comunidad->nombre}})</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-5">
+              <img src="{{ $ciudad->first()->imagen }}" alt="">
+            </div>
+            <div class="col-7">
+              <p>{{ $ciudad->first()->descripcion }}</p> 
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 	<div class="container-fluid px-5">
     @if( $rutas->pluck('ciudad_id')->contains($ciudad->first()->id))
@@ -58,17 +88,15 @@ function myMap() {
 				<div class="container-fluid">
           
             @foreach ($rutas as $ruta)
-          {{-- {{ $ruta->each->tematicas }} --}}
-
            <?php $var = $ruta->puntos->sum('coste'); ?>
             <div class="card ruta-card mb-4 tematica{{ $ruta->tematicas->pluck('id')->implode(' tematica') }}">
               <div class="card-header">
                 <div class="row">
                   <div class="col-12 col-sm-7 col-md-8 text-center text-sm-left">
-                    <span class="h4 text-left">{{ $ruta->nombre }}</span>
+                    <a class="sin_subrayar" href="{{ route('rutas.show', $ruta->id) }}"><span class="h4 text-left">{{ $ruta->nombre }}</span></a>
                   </div>
                   <div class="col-12 col-sm-5 col-md-4 text-center text-sm-right">
-                    @if($ruta->coste != 0)
+                    @if($var != 0)
                   <span class="btn btn-warning btn-md">Coste estimado: {{ $var }}€</span>
                 @else
                   <span class="btn btn-warning btn-sm">Coste no disponible</span>

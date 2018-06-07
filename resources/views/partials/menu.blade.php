@@ -32,7 +32,7 @@
 @elseif (auth()->user()->role_id === 2)
   <nav class="navbar navbar-expand-md navbar-dark bg-primary pr-3" id="navbar-principal">
     <a class="navbar-brand" href="{{route('home')}}">
-      <img src="/img/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""> Far Away!
+      <img src="/img/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""> tusRutas
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

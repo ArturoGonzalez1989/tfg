@@ -9998,6 +9998,7 @@ a.text-dark:focus {
 
 body {
   background-color: white;
+  font-family: 'Montserrat', sans-serif;
 }
 
 @media (min-width: 768px) {
@@ -10157,6 +10158,10 @@ body {
   }
 }
 
+.carousel-puntos {
+  height: 500px;
+}
+
 .encabezado-1 {
   font-size: 22px;
 }
@@ -10175,10 +10180,10 @@ hr:last-Child {
 /* -------------- */
 
 .separador-titulo {
-  height: 3px;
+  height: 2px;
   width: 10%;
   margin: 0;
-  background-color: yellow;
+  background-color: #007BFF;
   margin-bottom: 50px;
 }
 
@@ -10193,7 +10198,7 @@ hr:last-Child {
 }
 
 .div-encabezado {
-  padding: 200px 0;
+  padding: 150px 0;
   background-image: url("/img/portada2.jpg");
   background-repeat: no-repeat;
   background-size: cover;

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Ciudad;
+use App\ImagenPunto;
 use App\Mensaje_Punto;
+use App\Mensaje_Ruta;
 use App\Punto;
 use Illuminate\Http\Request;
 
@@ -65,13 +67,16 @@ class ControladorPuntos extends Controller
     public function show($id)
     {
         $punto           = Punto::findOrFail($id);
+        $puntos          = Punto::all();
         $ciudades        = Ciudad::all();
+        $mensajes_ruta   = Mensaje_Ruta::all();
         $mensajes_puntos = Mensaje_Punto::all();
+        $imagenes        = ImagenPunto::all();
 
         if (auth()->guest()) {
-            return view('usuario.puntos.show', compact('punto', 'ciudades'));
+            return view('usuario.puntos.show', compact('punto', 'puntos', 'mensajes_puntos', 'mensajes_ruta', 'ciudades', 'imagenes'));
         } elseif (auth()->user()->role_id === 2) {
-            return view('usuario.puntos.show', compact('punto', 'ciudades'));
+            return view('usuario.puntos.show', compact('punto', 'puntos', 'mensajes_puntos', 'mensajes_ruta', 'ciudades', 'imagenes'));
         } elseif (auth()->user()->role_id === 1) {
             return view('admin.puntos.show', compact('punto', 'mensajes_puntos'));
         }

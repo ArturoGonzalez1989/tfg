@@ -8,9 +8,36 @@
 </div> {{-- Jumbotron --}}
 
 <?php $rutas = $rutas->sortByDesc('votos'); ?>
-<div class="container">
-  @foreach( Auth::user()->tematicas as $tematica)
-    <h3 class="pt-5">Rutas de {{ $tematica->nombre }}</h3>
+<div class="container-fluid pt-5">
+  <div class="row">
+    <div class="col-lg-2">
+      <div class="card text-center mb-5">
+          <a data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+            <div class="card-header">
+              <span class="lead">Filtrar por temas <i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+            </div>
+          </a>
+            <div class="card-body text-left">
+              <div class="collapse multi-collapse" id="multiCollapseExample1">
+                    <div class="form-check">
+                          <input class="filtrar2 form-check-input" type="radio" name="exampleRadios" checked value="0">
+                          <label class="form-check-label" for="exampleRadios1">Todos los temas</label>
+                        </div>
+                @foreach(Auth::user()->tematicas as $tematica)
+                    <div class="form-check">
+                      <input class="filtrar2 form-check-input" type="radio" name="exampleRadios" id="tematica" value="{{ $tematica->id }}">
+                      <label class="form-check-label" for="exampleRadios1">{{ $tematica->nombre }}</label>
+
+                    </div>
+              @endforeach
+              </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-lg-10">
+      @foreach( Auth::user()->tematicas as $tematica)
+          <div class="contenedor-rutas tematica{{ $tematica->id }}">
+          <h3>Rutas de {{ $tematica->nombre }}</h3>
       <hr class="separador-titulo text-left">
     @foreach ($rutas as $ruta)
       <?php $var = $ruta->puntos->sum('coste'); ?>
@@ -65,7 +92,11 @@
           @endif
         @endforeach
       @endforeach
+          </div>
     @endforeach
+    </div>
+  </div>
+  
 </div>
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Ciudad;
 use App\Comunidad;
+use App\Mensaje_Punto;
 use App\Mensaje_Ruta;
 use App\Punto;
 use App\Ruta;
@@ -23,14 +24,25 @@ class ControladorRutas extends Controller
         $rutas    = Ruta::all();
         $mensajes = Mensaje_Ruta::all();
         $puntos   = Punto::all();
-
+        $opcion   = 0;
         if (auth()->guest()) {
             return view('usuario.rutas.index', compact('rutas', 'mensajes'));
         } elseif (auth()->user()->role_id === 2) {
-            return view('usuario.rutas.index', compact('rutas', 'mensajes', 'puntos'));
+            return view('usuario.rutas.index', compact('rutas', 'mensajes', 'puntos', 'opcion'));
         } elseif (auth()->user()->role_id === 1) {
             return view('admin.rutas.index', compact('rutas'));
         }
+    }
+
+    public function ordenadas($opcion)
+    {
+
+        $rutas    = Ruta::all();
+        $mensajes = Mensaje_Ruta::all();
+        $puntos   = Punto::all();
+
+        return view('usuario.rutas.index', compact('rutas', 'mensajes', 'puntos', 'opcion'));
+
     }
 
     public function mostrarPuntos($id)
@@ -112,14 +124,15 @@ class ControladorRutas extends Controller
      */
     public function show($id)
     {
-        $ruta     = Ruta::findOrFail($id);
-        $puntos   = Punto::all();
-        $mensajes = Mensaje_Ruta::all();
+        $ruta            = Ruta::findOrFail($id);
+        $puntos          = Punto::all();
+        $mensajes_ruta   = Mensaje_Ruta::all();
+        $mensajes_puntos = Mensaje_Punto::all();
 
         if (auth()->guest()) {
-            return view('usuario.rutas.show', compact('ruta', 'puntos', 'mensajes'));
+            return view('usuario.rutas.show', compact('ruta', 'puntos', 'mensajes_ruta', 'mensajes_puntos'));
         } elseif (auth()->user()->role_id === 2) {
-            return view('usuario.rutas.show', compact('ruta', 'puntos', 'mensajes'));
+            return view('usuario.rutas.show', compact('ruta', 'puntos', 'mensajes_ruta', 'mensajes_puntos'));
         } elseif (auth()->user()->role_id === 1) {
             return view('admin.rutas.show', compact('ruta', 'puntos', 'mensajes'));
         }

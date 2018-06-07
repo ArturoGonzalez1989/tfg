@@ -3,7 +3,7 @@
 @section('contenido')
 
 <div class="jumbotron jumbotron-fluid text-center mb-5">
-  <h1>Tus rutas</h1>
+  <h1>Mis rutas</h1>
 </div> {{-- Jumbotron --}}
 
 <?php $rutas = $rutas->sortByDesc('votos'); ?>

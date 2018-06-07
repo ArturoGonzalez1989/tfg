@@ -46,7 +46,7 @@
 			@endif
 		@endforeach
 	</table>
-	<button class="btn btn-info my-5" type="submit">Editar ruta</button>
+	<button class="btn btn-info my-5" type="submit">Confirmar creación de ruta</button>
 	</form>	
 </div>
 

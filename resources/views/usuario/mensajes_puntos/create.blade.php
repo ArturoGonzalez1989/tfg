@@ -7,7 +7,7 @@
 </div> {{-- Jumbotron --}}
 
 <div class="container mt-5">
-	<form method="POST" id="formulario" action="{{ route('mensajes.store') }}">
+	<form method="POST" id="formulario" action="{{ route('mensajes_puntos.store') }}">
         {{ csrf_field() }}
         <div class="container border p-5">
             <div class="row form-group justify-content-center">
@@ -19,7 +19,7 @@
         </div>{{-- {{ $ruta->creador->id }} --}}
         <div class="row justify-content-center pt-5">
         <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
-        <input type="hidden" name="ruta_id" value="{{ $ruta->id }}">
+        <input type="hidden" name="punto_id" value="{{ $punto->id }}">
         <button class="btn btn-info" type="submit">Enviar mensaje</button>
             
         </div>

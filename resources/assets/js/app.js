@@ -52,4 +52,26 @@ $(".filtrar").on("change", function(){
 		$(".ruta-card").removeClass("d-none");
 	}
 });
+
+$(".filtrarComunidad").on("change", function(){
+	var comunidad = $(this).val();
+
+	$(".contenedor-comunidad").addClass("d-none");
+	$(".comunidad"+comunidad).removeClass("d-none");
+	if(comunidad == 0){
+		$(".contenedor-comunidad").removeClass("d-none");
+	}
+});
 	
+
+$(".filtrar2").on("change", function(){
+	var tematica = $(this).val();
+	// alert(tematica);
+
+
+	$(".contenedor-rutas").addClass("d-none");
+	$(".tematica"+tematica).removeClass("d-none");
+	if(tematica == 0){
+		$(".contenedor-rutas").removeClass("d-none");
+	}
+});

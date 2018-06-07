@@ -26,4 +26,9 @@ class Punto extends Model
     {
         return $this->hasMany(Mensaje_Punto::class);
     }
+
+    public function imagenes()
+    {
+        return $this->hasMany(ImagenPunto::class);
+    }
 }

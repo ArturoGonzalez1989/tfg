@@ -7,6 +7,6 @@
         @endif
 	</h1>
 	<p class="lead">
-    	Descubre todo lo que <em>Far Away!</em> puede hacer por ti
+    	Descubre todo lo que <em>tusRutas</em> puede hacer por ti
 	</p>
 </div>

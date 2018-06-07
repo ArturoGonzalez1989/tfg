@@ -41,7 +41,7 @@ class ControladorMensajesRutas extends Controller
     {
         $ruta = Ruta::findOrFail($id);
 
-        return view('usuario.mensajes.create', compact('ruta'));
+        return view('usuario.mensajes_rutas.create', compact('ruta'));
     }
 
     /**
@@ -71,9 +71,9 @@ class ControladorMensajesRutas extends Controller
         //     "updated_at" => Carbon::now(),
         // ]);
 
-        Mensaje::create($request->all());
+        Mensaje_Ruta::create($request->all());
 
-        return redirect()->route('mensajes.index');
+        return redirect()->route('rutas.show', $request->input('ruta_id'));
     }
 
     /**

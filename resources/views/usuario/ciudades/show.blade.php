@@ -10,7 +10,7 @@
 <script>
 function myMap() {
       var mapProp= {
-        center:new google.maps.LatLng( {{ $ciudad->first()->coordenadas }}  ),
+        center:new google.maps.LatLng( {{ $ciudad->coordenadas }}  ),
           zoom:12,
           zoomControl: false,
           scaleControl: false,
@@ -24,59 +24,82 @@ function myMap() {
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqs-4rD_7XYuZ5KQnVxR9NgnrKJPhCbUc&callback=myMap"></script>
 
+<h2 class="py-5 text-center">Rutas en <a href="" class="badge badge-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
+  {{ $ciudad->nombre}}
+</a></h2>
 
-<div class="container-fluid border p-5 my-5">
-	<div class="row">
-    	<div class="col-md-3">
-    		<img class="img-fluid img-thumbnail" src="{{ Storage::url($ciudad->imagen) }}" alt="">
-			
-		</div>
-		<div class="col-md-9">
-			<h2>{{ $ciudad->nombre}} ({{ $ciudad->comunidad->nombre}})</h2>
-			<p>{{ $ciudad->descripcion }}</p>
-		</div>
-	</div>
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{ $ciudad->nombre}} ({{ $ciudad->comunidad->nombre}})</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-5">
+              <img src="{{ $ciudad->imagen }}" alt="">
+            </div>
+            <div class="col-7">
+              <p>{{ $ciudad->descripcion }}</p> 
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
 </div>
 
-{{-- <h2 class="py-5 text-center">Rutas encontradas en <a class="sin_subrayar" href="{{route('ciudades.show', $ciudad->first()->id) }}">{{ $ciudad->first()->nombre}} <img class="img-fluid border" width="50px" src="/img/banderas/{{ $ciudad->first()->comunidad->bandera }}" alt=""></h2> --}}
-{{-- 	</a> --}}
+  <div class="container-fluid px-5">
+    @if( $rutas->pluck('ciudad_id')->contains($ciudad->id))
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="card text-center mb-5">
+          <a data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
+            <div class="card-header">
+              <span class="lead">Filtrar por temas <i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+            </div>
+          </a>
+          <input type="hidden" id="ciudad" value="{{ $ciudad->id }}">
+            <div class="card-body text-left">
+              <div class="collapse multi-collapse" id="multiCollapseExample1">
+                    <div class="form-check">
+                          <input class="filtrar form-check-input" type="radio" name="exampleRadios" checked value="0">
+                          <label class="form-check-label" for="exampleRadios1">Todos los temas</label>
+                        </div>
+                @foreach($tematicas as $tematica)
+                    <div class="form-check">
+                      <input class="filtrar form-check-input" type="radio" name="exampleRadios" id="tematica" value="{{ $tematica->id }}">
+                      <label class="form-check-label" for="exampleRadios1">{{ $tematica->nombre }}</label>
 
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-12 col-lg-2">
-				<div class="card text-center mb-5">
-					<a data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">
-						<div class="card-header">
-							<h4>Filtrar por temas <i class="fa fa-chevron-down" aria-hidden="true"></i></h4>
-						</div>
-					</a>
-				  	<div class="card-body text-left">
-				  		<div class="collapse multi-collapse" id="multiCollapseExample1">
-					  		@foreach($tematicas as $tematica)
-						        <div class="form-check">
-								  <input class="form-check-input" type="checkbox" value="{{ $tematica->id }}" id="defaultCheck1">
-								  <label class="form-check-label" for="defaultCheck1">{{ $tematica->nombre }}</label>
-								</div>
-							@endforeach
-							</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-12 col-lg-10">
-				<div class="container-fluid">
-					@foreach ($rutas as $ruta)
-					<?php $var = $ruta->puntos->sum('coste'); ?>
-				<div class="card mb-4">
+                    </div>
+              @endforeach
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-10">
+        <div class="container-fluid">
+          
+            @foreach ($rutas as $ruta)
+           <?php $var = $ruta->puntos->sum('coste'); ?>
+            <div class="card ruta-card mb-4 tematica{{ $ruta->tematicas->pluck('id')->implode(' tematica') }}">
               <div class="card-header">
                 <div class="row">
                   <div class="col-12 col-sm-7 col-md-8 text-center text-sm-left">
-                    <span class="h4 text-left">{{ $ruta->nombre }}</span>
+                    <a class="sin_subrayar" href="{{ route('rutas.show', $ruta->id) }}"><span class="h4 text-left">{{ $ruta->nombre }}</span></a>
                   </div>
                   <div class="col-12 col-sm-5 col-md-4 text-center text-sm-right">
-                    @if($ruta->coste != 0)
-                  <span class="p-2 bg-warning">Coste estimado: {{ $var }}€</span>
+                    @if($var != 0)
+                  <span class="btn btn-warning btn-md">Coste estimado: {{ $var }}€</span>
                 @else
-                  <span class="p-2 bg-warning">Coste no disponible</span>
+                  <span class="btn btn-warning btn-sm">Coste no disponible</span>
                 @endif
                   </div>
                 </div>
@@ -112,13 +135,18 @@ function myMap() {
                 </div>
               </div>
             </div>
-				@endforeach
+        @endforeach
+          
+          
 
-				</div>
-				
-			</div>
-		</div>
-	</div>
+        </div>
+        
+      </div>
+    </div>
+    @else
+            <p class="text-center py-5 my-5 h4">No hay rutas en esta ciudad todavía</p>
+          @endif
+  </div>
 	
 
 
