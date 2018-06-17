@@ -134,7 +134,7 @@ class ControladorRutas extends Controller
         } elseif (auth()->user()->role_id === 2) {
             return view('usuario.rutas.show', compact('ruta', 'puntos', 'mensajes_ruta', 'mensajes_puntos'));
         } elseif (auth()->user()->role_id === 1) {
-            return view('admin.rutas.show', compact('ruta', 'puntos', 'mensajes'));
+            return view('admin.rutas.show', compact('ruta', 'puntos', 'mensajes_ruta'));
         }
     }
 

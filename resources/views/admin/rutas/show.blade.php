@@ -106,7 +106,7 @@
 			</tr>
 		</thead>
 		<tbody>
-				@foreach($mensajes as $mensaje)
+				@foreach($mensajes_ruta as $mensaje)
 					@if($mensaje->ruta->id == $ruta->id)
 						<tr>
 							<td>{{ $mensaje->id }}</td>
