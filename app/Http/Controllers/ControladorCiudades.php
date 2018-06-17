@@ -18,6 +18,13 @@ class ControladorCiudades extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        // $this->middleware('auth');
+        $this->middleware('roles', ['except' => ['index', 'show', 'byComunidad']]);
+    }
+
     public function index()
     {
         $comunidades = Comunidad::all();
@@ -78,8 +85,6 @@ class ControladorCiudades extends Controller
     public function store(Request $request)
     {
         $ciudad = Ciudad::create($request->all());
-
-        // $ruta->puntos()->attach($request->puntos);
 
         if ($request->hasFile('imagen')) {
             $ciudad->imagen = $request->file('imagen')->store('public');

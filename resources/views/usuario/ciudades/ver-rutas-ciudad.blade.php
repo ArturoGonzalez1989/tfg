@@ -40,7 +40,7 @@ function myMap() {
         <div class="container-fluid">
           <div class="row">
             <div class="col-5">
-              <img src="{{ $ciudad->first()->imagen }}" alt="">
+              <img style="max-height: 200px;" class="img-fluid" src="{{ Storage::url($ciudad->imagen)}}" alt="">
             </div>
             <div class="col-7">
               <p>{{ $ciudad->first()->descripcion }}</p> 

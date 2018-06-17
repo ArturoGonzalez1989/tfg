@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Punto extends Model
 {
-    protected $fillable = ['nombre', 'ciudad_id', 'descripcion', 'coste'];
+    protected $fillable = ['nombre', 'ciudad_id', 'descripcion', 'coste', 'id', 'coordenadas'];
 
     public function ciudad()
     {

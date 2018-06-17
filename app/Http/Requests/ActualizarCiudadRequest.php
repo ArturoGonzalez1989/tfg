@@ -23,7 +23,6 @@ class ActualizarCiudadRequest extends FormRequest
      */
     public function rules()
     {
-        //dd($this->all());
         return [
             'nombre'       => 'required',
             'descripcion'  => 'required',

@@ -11,16 +11,10 @@
 	        <h1 class="display-4">
 	            Base legal
 	        </h1>
-	        <p class="lead">
-	            Aquí encontrará todas las bases legales aplicadas a esta aplicación web
-	        </p>
 	    </div>
 	</div>
 	<div class="container">
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium alias magni ab, sint maiores eligendi corporis similique saepe deleniti qui in dolorum fugiat facere numquam iure dolor illo porro odit!</p>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium alias magni ab, sint maiores eligendi corporis similique saepe deleniti qui in dolorum fugiat facere numquam iure dolor illo porro odit!</p>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium alias magni ab, sint maiores eligendi corporis similique saepe deleniti qui in dolorum fugiat facere numquam iure dolor illo porro odit!</p>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium alias magni ab, sint maiores eligendi corporis similique saepe deleniti qui in dolorum fugiat facere numquam iure dolor illo porro odit!</p>
+		<p>Esta aplicación y su código fuente forman parte del trabajo de fin de grado de la titulación Grado en Ingeniería Informática de la Universidad Internacional de la Rioja (UNIR).</p>
 </main>
 
 @stop

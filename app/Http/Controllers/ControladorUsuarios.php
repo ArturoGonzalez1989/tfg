@@ -22,9 +22,8 @@ class ControladorUsuarios extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('roles:admin', ['except' => ['edit', 'show']]);
-        $this->middleware('roles:usuario', ['except' => ['edit', 'show']]);
+        // $this->middleware('auth');
+        $this->middleware('roles', ['except' => ['edit', 'show', 'update']]);
     }
 
     public function index()

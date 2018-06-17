@@ -13,5 +13,8 @@ class Comunidad extends Model
     protected $fillable = ['nombre', 'descripcion', 'bandera'];
 
     // protected $fillable = ['nombre'];
-
+    public function ciudad()
+    {
+        return $this->hasMany(Ciudad::class);
+    }
 }

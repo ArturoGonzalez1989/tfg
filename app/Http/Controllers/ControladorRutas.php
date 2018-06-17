@@ -19,6 +19,7 @@ class ControladorRutas extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $rutas    = Ruta::all();
@@ -36,7 +37,6 @@ class ControladorRutas extends Controller
 
     public function ordenadas($opcion)
     {
-
         $rutas    = Ruta::all();
         $mensajes = Mensaje_Ruta::all();
         $puntos   = Punto::all();
@@ -173,7 +173,7 @@ class ControladorRutas extends Controller
 
         $ruta->puntos()->sync($request->puntos);
 
-        return redirect()->route('rutas.index');
+        return redirect()->route('cuenta');
     }
 
     /**

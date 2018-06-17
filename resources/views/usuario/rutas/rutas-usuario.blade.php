@@ -43,12 +43,12 @@
               <div class="card-body text-center py-lg-0 pl-md-0">
                 <div class="row">
                   <div class="col-12 col-lg-3">
-                    <h5 class="card-title pb-0 mb-0">
-                      <img width="250" src="/img/rutas/{{ $ruta->imagen }}" alt="">
+                    <h5 class="card-title pb-0 mb-0 text-lg-left">
+              <img style="max-height: 200px;" class="img-fluid" src="{{ Storage::url($ruta->imagen)}}" alt="">
                     </h5>
                   </div>
-                  <div class="col-12 col-lg-6 pt-3 text-xl-left">
-                    {{ $ruta->descripcion_corta }}
+                  <div class="col-12 col-lg-6 pt-3 pl-lg-5 ml-lg-5 ml-xl-0 text-lg-left">
+                    <p>{{ $ruta->descripcion }}</p>
                   </div>
                   <div class="col-12 col-lg-3 text-center pt-3 text-lg-right">
                     <?php $contador = 0 ?>
@@ -62,8 +62,7 @@
                     <div class="iconos-ruta">
                       <span data-toggle="tooltip" title="Me gusta"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
                       {{ $ruta->votos}}</span><span class="pl-4" data-toggle="tooltip" title="Comentarios"><i class="fa fa-comments-o" aria-hidden="true"></i>
-                      {{ $mensajes->where('ruta_id', $ruta->id)->count() }}</span><span class="pl-4" data-toggle="tooltip" title="Puntos de interés"><i class="fa fa-map-marker" aria-hidden="true"></i>
-                      {{ $contador}}</span>
+                      {{ $mensajes->where('ruta_id', $ruta->id)->count() }}</span><span class="pl-4" data-toggle="tooltip" title="Puntos de interés"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $contador}}</span><span class="pl-4" data-toggle="tooltip" title="Duración de la ruta"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $ruta->duracion}}</span>
                     </div>
                   </div>
                 </div>

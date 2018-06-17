@@ -37,9 +37,13 @@
       	
 
 	      	@foreach($comunidades as $comunidad)
-	      	<div class="contenedor-comunidad comunidad{{ $comunidad->id }}">
-	      		<h3>Ciudades de {{ $comunidad->nombre }}</h3>
-		    <hr class="separador-titulo text-left">
+	      	<div class="contenedor-comunidad comunidad{{ $comunidad->id }} mb-5">
+	      		@if($comunidad->ciudad->isNotEmpty())
+	      			<h3>Ciudades de {{ $comunidad->nombre }}</h3>
+	      			<hr class="separador-titulo text-left">
+	      		@endif
+	      		{{$comunidad->ciudad->contains('id')}}
+		    
 			@foreach($ciudades as $ciudad)
 				@if($ciudad->comunidad_id == $comunidad->id)
 					<div class="list-group list-group-flush">
@@ -48,7 +52,7 @@
 								<div class="card-body text-center">
 									<div class="row">
 										<div class="col-12 col-lg-2">
-												<img class="img-fluid" src="/img/ciudades/{{ $ciudad->imagen }}" alt="imagen ciudad">
+						<img style="max-height: 200px;" class="img-fluid img-thumbnail" src="{{ Storage::url($ciudad->imagen)}}" alt="">
 										</div>
 										<div class="col-12 col-lg-9 pt-2 text-xl-left">
 											<p class="h4 text-left">{{ $ciudad->nombre }}</p>

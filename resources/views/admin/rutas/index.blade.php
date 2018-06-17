@@ -14,7 +14,6 @@
 			<tr>
 				<th scope="col">ID</th>
 				<th scope="col">Nombre</th>
-				<th scope="col">Descripción</th>
 				<th scope="col"><span data-toggle="tooltip" title="Me gusta"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span></th>
 				<th scope="col"><span data-toggle="tooltip" title="Comentarios"><i class="fa fa-comments-o" aria-hidden="true"></i></span></th>
 				<th scope="col"><span data-toggle="tooltip" title="Puntos de interés"><i class="fa fa-map-marker" aria-hidden="true"></i></span></th>
@@ -38,7 +37,6 @@
 				<tr>
 					<td>{{ $ruta->id }}</td>
 					<td>{{ $ruta->nombre }}</td>
-					<td>{{ $ruta->descripcion }}</td>
 					<td>{{ $ruta->votos }}</td>
 					<td>{{ $ruta->mensajes->count() }}</td>
 					<td>{{ $ruta->puntos->count() }}</td>

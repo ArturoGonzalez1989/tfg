@@ -41,7 +41,7 @@ function myMap() {
         <div class="container-fluid">
           <div class="row">
             <div class="col-5">
-              <img src="{{ $ciudad->imagen }}" alt="">
+              <img style="max-height: 200px;" class="img-fluid" src="{{ Storage::url($ciudad->imagen)}}" alt="">
             </div>
             <div class="col-7">
               <p>{{ $ciudad->descripcion }}</p> 
@@ -86,7 +86,7 @@ function myMap() {
       </div>
       <div class="col-12 col-lg-10">
         <div class="container-fluid">
-          
+
             @foreach ($rutas as $ruta)
            <?php $var = $ruta->puntos->sum('coste'); ?>
             <div class="card ruta-card mb-4 tematica{{ $ruta->tematicas->pluck('id')->implode(' tematica') }}">
@@ -97,9 +97,10 @@ function myMap() {
                   </div>
                   <div class="col-12 col-sm-5 col-md-4 text-center text-sm-right">
                     @if($var != 0)
-                  <span class="btn btn-warning btn-md">Coste estimado: {{ $var }}€</span>
+          
+                  <span class="btn btn-warning btn-md">Coste estimado: {{ $var }}€</span><a data-toggle="tooltip" title="Me gusta" class="btn btn-white btn-md"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
                 @else
-                  <span class="btn btn-warning btn-sm">Coste no disponible</span>
+                  <span class="btn btn-warning btn-md">Coste no disponible</span><a data-toggle="tooltip" title="Me gusta" class="btn btn-white btn-md"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></a>
                 @endif
                   </div>
                 </div>
@@ -110,11 +111,11 @@ function myMap() {
                 <div class="row">
                   <div class="col-12 col-lg-3">
                     <h5 class="card-title pb-0 mb-0 text-lg-left">
-                      <img width="250" src="/img/rutas/{{ $ruta->imagen }}" alt="">
+              <img style="max-height: 200px;" class="img-fluid" src="{{ Storage::url($ruta->imagen)}}" alt="">
                     </h5>
                   </div>
                   <div class="col-12 col-lg-6 pt-3 pl-lg-5 ml-lg-5 ml-xl-0 text-lg-left">
-                    {{ $ruta->descripcion_corta }}
+                    <p>{{ $ruta->descripcion }}</p>
                   </div>
                   <div class="col-12 col-lg-3 text-center pt-3 text-lg-right">
                     <?php $contador = 0 ?>
@@ -128,8 +129,7 @@ function myMap() {
                     <div class="iconos-ruta">
                       <span data-toggle="tooltip" title="Me gusta"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
                       {{ $ruta->votos}}</span><span class="pl-4" data-toggle="tooltip" title="Comentarios"><i class="fa fa-comments-o" aria-hidden="true"></i>
-                      {{ $mensajes->where('ruta_id', $ruta->id)->count() }}</span><span class="pl-4" data-toggle="tooltip" title="Puntos de interés"><i class="fa fa-map-marker" aria-hidden="true"></i>
-                      {{ $contador}}</span>
+                      {{ $mensajes->where('ruta_id', $ruta->id)->count() }}</span><span class="pl-4" data-toggle="tooltip" title="Puntos de interés"><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $contador}}</span><span class="pl-4" data-toggle="tooltip" title="Duración de la ruta"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $ruta->duracion}}</span>
                     </div>
                   </div>
                 </div>

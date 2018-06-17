@@ -15,9 +15,16 @@
 			<img class="img-fluid img-thumbnail" src="{{ Storage::url($punto->imagen)}}" alt="">
 		</div>
 		<div class="col-7">
-			<form method="post" id="formulario" action="{{ route('rutas.update', $punto->id) }}" enctype="multipart/form-data">
+			<form method="post" id="formulario" action="{{ route('puntos.update', $punto->id) }}" enctype="multipart/form-data">
 				{!! method_field('PUT') !!}	
 					{{ csrf_field() }}
+				<div class="row form-group">
+					<label class="col-form-label col-md-4" for="nombre">ID de la ruta:</label>
+					<div class="col-md-8">
+		    			<input class="form-control" id="id" name="id" required type="text" value="{{ $punto->id }}">
+		    			</input>
+					</div>
+				</div>
 				<div class="row form-group">
 					<label class="col-form-label col-md-4" for="nombre">Nombre de la punto:</label>
 					<div class="col-md-8">
@@ -59,6 +66,13 @@
 		                </select>
 		            </div>
 		        </div>
+		        <div class="row form-group">
+					<label class="col-form-label col-md-4" for="nombre">Coordenadas del punto:</label>
+					<div class="col-md-8">
+		    			<input class="form-control" id="coordenadas" name="coordenadas" required type="text" value="{{ $punto->coordenadas }}">
+		    			</input>
+					</div>
+				</div>
 		</div>
 		<div class="container">
 			<div class="form-group">

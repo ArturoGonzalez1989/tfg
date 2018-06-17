@@ -39,7 +39,7 @@
 			<div class="contenedor">
 				<a href="{{ route('rutas.index') }}">
 					<div class="contenedor">
-						<img class="imagen img-thumbnail" src="/img/secciones/recomendar.png" alt="recomandar rutas">
+						<img class="imagen img-thumbnail" src="/img/secciones/todas.jpg" alt="recomandar rutas">
 						<div class="overlay">
 						    <div class="texto">Ver todas las rutas</div>
 						</div>
@@ -78,9 +78,7 @@
 			</div>
 		</div>		
 	</div>
-
 </div>
-
 
 </div> {{-- fin container --}}
 

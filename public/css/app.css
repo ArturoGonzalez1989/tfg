@@ -9999,6 +9999,7 @@ a.text-dark:focus {
 body {
   background-color: white;
   font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
 }
 
 @media (min-width: 768px) {
@@ -10199,7 +10200,7 @@ hr:last-Child {
 
 .div-encabezado {
   padding: 150px 0;
-  background-image: url("/img/portada2.jpg");
+  background-image: url("/img/portada.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }

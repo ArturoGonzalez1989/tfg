@@ -9,7 +9,7 @@
 <div class="container my-5 py-5 border">
     <div class="row justify-content-center">
         <div class="col-md-2">
-        	<img class="img-fluid img-thumbnail" width="150" src="/img/usuarios/{{ $usuario->imagen }}" alt="imagen de usuario">
+        	<img class="img-fluid img-thumbnail" src="{{ Storage::url($usuario->imagen)}}" alt="">
         </div>
         <div class="col-md-10">
         	<p>

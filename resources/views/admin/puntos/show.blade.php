@@ -14,6 +14,7 @@
 			<p>Descripción: {{ $punto->descripcion}}</p>
 			<p>Comentarios: {{ $punto->mensajes->count() }}</p>
 			<p>Coste: {{ $punto->coste }}€</p>
+			<p>Coordenadas: {{ $punto->coordenadas }}</p>
 		</div>
 		<div class="col-md-3">
 			<img class="img-fluid img-thumbnail" src="{{ Storage::url($punto->imagen)}}" alt="">			

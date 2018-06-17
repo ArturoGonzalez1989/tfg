@@ -71,7 +71,7 @@ class ControladorPuntos extends Controller
         $ciudades        = Ciudad::all();
         $mensajes_ruta   = Mensaje_Ruta::all();
         $mensajes_puntos = Mensaje_Punto::all();
-        $imagenes        = ImagenPunto::all();
+        $imagenes        = ImagenPunto::where('punto_id', $id)->get();
 
         if (auth()->guest()) {
             return view('usuario.puntos.show', compact('punto', 'puntos', 'mensajes_puntos', 'mensajes_ruta', 'ciudades', 'imagenes'));

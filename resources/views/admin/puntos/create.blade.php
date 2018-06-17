@@ -43,6 +43,13 @@
                             </input>
                         </div>
                     </div>
+                    <div class="row form-group">
+                        <label class="col-form-label col-md-4" for="mensaje">Coordenadas:</label>
+                        <div class="col-md-8">
+                            <input class="form-control" placeholder="42.462757, -2.446818" id="coordenadas" name="coordenadas" required type="text">
+                            </input>
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="exampleInputFile">Elegir foto</label>
                         <div class="col-sm-10">

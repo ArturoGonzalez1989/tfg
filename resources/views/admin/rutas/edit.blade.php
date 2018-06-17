@@ -18,6 +18,13 @@
 				{!! method_field('PUT') !!}	
 					{{ csrf_field() }}
 				<div class="row form-group">
+					<label class="col-form-label col-md-4" for="nombre">ID de la ruta:</label>
+					<div class="col-md-8">
+		    			<input class="form-control" id="id" name="id" required type="text" value="{{ $ruta->id }}">
+		    			</input>
+					</div>
+				</div>
+				<div class="row form-group">
 					<label class="col-form-label col-md-4" for="nombre">Nombre de la ruta:</label>
 					<div class="col-md-8">
 		    			<input class="form-control" id="nombre" name="nombre" required type="text" value="{{ $ruta->nombre }}">
@@ -54,10 +61,14 @@
 		</div>
 		<div class="container">
 			<div class="form-group">
-			        <div class="form-group">
-	                    <label for="imagen">Cambiar foto ruta</label>
-	                    <input type="file" class="form-control-file" id="imagen" name="imagen">
-	                </div>
+		        <div class="form-group">
+                    <label for="imagen">Cambiar foto ruta</label>
+                    <input type="file" class="form-control-file" id="imagen" name="imagen">
+                </div>
+			</div>
+			<div class="form-group">
+		    	<label class="col-form-label" for="nombre">Votos:</label>
+		    	<input type="number" class="form-control" id="votos" name="votos" required value="{{ $ruta->votos }}">
 			</div>	
 		</div>	
 	</div>

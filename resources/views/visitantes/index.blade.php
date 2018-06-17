@@ -135,7 +135,8 @@
 				<div class="carousel-item active">
 					<div class="row">
 						<div class="col-12 col-lg-6">
-							<a href="{{ route('rutas.show', $primera->id) }}"><img class="imagen-carousel" src="/img/rutas/{{ $primera->imagen }}" alt=""></a>
+			
+							<a href="{{ route('rutas.show', $primera->id) }}"><img class="img-fluid img-thumbnail" src="{{ Storage::url($primera->imagen)}}" alt=""></a>
 						</div>
 						<div class="col-12 col-lg-6">
 							<h4 class="pb-2">{{ $primera->nombre }}</h4>
@@ -161,7 +162,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="carousel-item">
+				{{-- <div class="carousel-item">
 					<div class="row">
 						<div class="col-12 col-lg-6">
 							<a href="{{ route('rutas.show', $segunda->id) }}"><img class="imagen-carousel" src="/img/rutas/{{ $segunda->imagen }}" alt=""></a>
@@ -189,8 +190,8 @@
 							@endif
 						</div>
 					</div>
-				</div>
-				<div class="carousel-item">
+				</div> --}}
+				{{-- <div class="carousel-item">
 					<div class="row">
 						<div class="col-12 col-lg-6">
 							<a href="{{ route('rutas.show', $tercera->id) }}"><img class="imagen-carousel" src="/img/rutas/{{ $tercera->imagen }}" alt=""></a>
@@ -218,7 +219,7 @@
 							@endif
 						</div>
 					</div>
-				</div>
+				</div> --}}
 			</div>
 		</div>
 	</div>

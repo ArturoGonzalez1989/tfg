@@ -11,30 +11,31 @@
 	<h1>Información sobre punto turístico</h1>
 </div> {{-- Jumbotron --}}
 
-<div class="container-fluid pb-5">
+<div class="container-fluid pb-5 px-5">
 	<div class="row">
 		<div class="col-8">
-			<p class="text-center h1">{{ $punto->nombre }}</p>
 			<div class="container">	
-				<h4 class="p-5">{{ $punto->descripcion}}</h4>
+				<p class="text-left h2">{{ $punto->nombre }}</p> <span>Coste aproximado: {{$punto->coste}}€</span>
+				<p class="pt-5">{{ $punto->descripcion}}</p>
+
 			</div>
-			<div class="container">
+			<div class="container pt-3">
 				<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-					<ol class="carousel-indicators">
+					{{-- <ol class="carousel-indicators">
 						@foreach( $imagenes as $imagen )
 							<li data-target="#carouselExampleIndicators" data-slide-to="{{@iteration}}" class="active"></li> 
 						@endforeach
-					</ol>
-					<div class="carousel-inner mt-5 carousel-puntos border">
+					</ol> --}}
+					<div class="carousel-inner mt-5 carousel-puntos">
 						<?php
 							$elemento = $imagenes->shift();
 						?>
 					    <div class="carousel-item active">
-					    	<img class="d-block w-100 img-fluid" src="/img/puntos/{{ $elemento->imagen }}" alt="First slide">
+					    	<img class="d-block img-fluid" src="/img/puntos/{{ $elemento->imagen }}" alt="First slide">
 					    </div>
 						@foreach( $imagenes as $imagen )
 						    <div class="carousel-item">
-						    	<img class="d-block w-100 img-fluid" src="/img/puntos/{{ $imagen->imagen }}" alt="First slide">
+						    	<img class="d-block img-fluid" src="/img/puntos/{{ $imagen->imagen }}" alt="First slide">
 						    </div>
 						@endforeach
 				  		
@@ -99,11 +100,11 @@
                 <div class="row">
                   <div class="col-12 col-lg-3">
                     <h5 class="card-title pb-0 mb-0 text-lg-left">
-                      <img width="250" src="/img/rutas/{{ $ruta->imagen }}" alt="">
+              <img style="max-height: 200px;" class="img-fluid" src="{{ Storage::url($ruta->imagen)}}" alt="">
                     </h5>
                   </div>
                   <div class="col-12 col-lg-6 pt-3 pl-lg-5 ml-lg-5 ml-xl-0 text-lg-left">
-                    {{ $ruta->descripcion_corta }}
+                    {{ $ruta->descripcion }}
                   </div>
                   <div class="col-12 col-lg-3 text-center pt-3 text-lg-right">
                     <?php $contador = 0 ?>
@@ -118,7 +119,8 @@
                       <span data-toggle="tooltip" title="Me gusta"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
                       {{ $ruta->votos}}</span><span class="pl-4" data-toggle="tooltip" title="Comentarios"><i class="fa fa-comments-o" aria-hidden="true"></i>
                       {{ $mensajes_ruta->where('ruta_id', $ruta->id)->count() }}</span><span class="pl-4" data-toggle="tooltip" title="Puntos de interés"><i class="fa fa-map-marker" aria-hidden="true"></i>
-                      {{ $contador}}</span>
+                      {{ $contador}}</span><span class="pl-4" data-toggle="tooltip" title="Duración de la ruta"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ $ruta->duracion}}</span>
+                      
                     </div>
                   </div>
                 </div>
@@ -126,14 +128,13 @@
             </div>
 		@endforeach
 	</div>
-		
 </div>
 
 <div class="container mt-5">
 	<div class="card text-center">
 		<div class="card-header">
 			<div class="d-md-flex justify-content-between">
-				<h4 class="text-center">{{ $mensajes_puntos->where('punto_id', $punto->id)->count() }} comentarios sobre el punto</h4>
+				<h4 class="text-center">{{ $mensajes_puntos->where('punto_id', $punto->id)->count() }} comentarios</h4>
 				<a class="btn btn-primary" href="{{ route('mensajes.punto.crear', $punto->id) }}">Crear nuevo comentario</a>
 			</div>
 			
